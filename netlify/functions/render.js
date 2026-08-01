@@ -10,7 +10,7 @@ async function initWasm() {
 
   svgbobBg = require('./svgbob/svgbob_wasm_bg.js');
 
-  const wasmPath = resolve(__dirname, './svgbob/svgbob_wasm_bg.wasm');
+  const wasmPath = resolve(process.cwd(), 'netlify/functions/svgbob/svgbob_wasm_bg.wasm');
   const wasmBuffer = readFileSync(wasmPath);
 
   const imports = { './svgbob_wasm_bg.js': svgbobBg };
@@ -29,7 +29,8 @@ function extractAscii(markdown, blockId) {
 }
 
 exports.handler = async (event, context) => {
-  const { raw, id, bg, stroke } = event.queryStringParameters;
+  const params = event.queryStringParameters || {};
+  const { raw, id, bg, stroke } = params;
 
   if (!raw && !id) {
     try {
@@ -45,7 +46,7 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 500,
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-        body: `Error loading index.html: ${htmlError.message}. Check the path.`,
+        body: `Error loading index.html: ${htmlError.message}. Check paths.`,
       };
     }
   }
@@ -54,7 +55,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 400,
       headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-      body: 'raw and id is required',
+      body: 'Both "raw" and "id" query parameters are required.',
     };
   }
 
