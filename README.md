@@ -39,7 +39,7 @@ Use this page or construct the URL manually. You will need the direct link to yo
 
 | Parameter	Type | Importance | Description	Example |
 |:---------------|:-----------|:--------------------|
-| raw    | Required | URL to your raw Markdown file on GitHub/Gist	https://raw.github... |
+| raw    | Required | URL to your raw Markdown file on GitHub/Gist	https://raw.githubusercontent.com/ ... |
 | id     | Required | The unique ID assigned to your ASCII art block 123 |
 | bg     | Optional | SVG background color (HEX or name)	%23ffffff or white |
 | stroke | Optional	| Line and text color (HEX or name)	%23000000 or blue |
