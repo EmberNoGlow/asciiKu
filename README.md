@@ -20,15 +20,15 @@ It is specifically tailored for developer profiles and repository READMEs. Inste
 ASCII.Ku allows you to embed ASCII-based SVGs directly into your README files without adding extra files to your repository. Follow these three simple steps to get started:
 
 ### 1. Create a block in your README.md
-Wrap your ASCII art in a custom comment tag and place it inside a html comment block. ID = 123.
+Wrap your ASCII art in a custom comment tag and place it inside a html comment block. The ID can be any number of your choice (e.g., 1, 42, 123). Just ensure it matches the ID in your target URL.
 
 ```
-<!---123
+<!--123
       /\
      /  \
-    /\   \
+    /    \
    /      \
-  /   /\  _\
+  /   /\   \
  /   (  )   \
  \___/  \___/ 
 --->
@@ -38,35 +38,43 @@ Wrap your ASCII art in a custom comment tag and place it inside a html comment b
 Follow the visual guide.
 
 #### 1. Get raw file url
-![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/sceenshots/step1.png)
+![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/screenshots/step1.png)
+
+---
 
 #### 2. Copy link
-![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/sceenshots/step2.png)
+![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/screenshots/step2.png)
 
-#### 3. Generate link via [Home page](asciiku.netlify.app/)
-![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/sceenshots/step3.png)
+---
 
+#### 3. Generate link via [Home page](asciiku.netlify.app/) (Recommended)
+![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/screenshots/step3.png)
+
+---
 
 ### 3. Embed the image
 Insert the final URL into your Markdown file using standard image syntax:
 
+> [!NOTE]
+> replace `USER/REPO` and `PATH/TO/FILE.md` with existing file repo / file path
+
 ```
-![my ascii art](https://asciiku.netlify.app/?id=123&raw=file.md)
+![my ascii art](https://asciiku.netlify.app/?id=123&raw=raw.githubusercontent.com/USER/REPO/refs/heads/main/PATH/TO/FILE.md)
 ```
 
 
-### 2. Generate your SVG MANUALY
+### Alternative: Generate your SVG MANUALLY
 You will need the direct link to your raw Markdown file. Use `?` after the domain slash `asciiku.netlify.app`, and combine the parameters below with `&`
 
 | Parameter	Type | Importance | Description |
 |:---------------|:-----------|:--------------------|
 | raw    | Required | URL to your raw Markdown file on GitHub/Gist |
-| id     | Required | The unique ID assigned to your ASCII art block 123 |
+| id     | Required | The unique ID assigned to your ASCII art block |
 | bg     | Optional | SVG background color (HEX or name)	%23ffffff or white |
 | stroke | Optional	| Line and text color (HEX or name)	%23000000 or blue |
 
-> [!NOTE]
-> Since `#` is an anchor, convert it to `%23`.
+> [!WARNING]
+> If you use a HEX color code (e.g. #ffffff), be sure to replace the # sign with the code %23, otherwise the link will break.
 
 
 ---
