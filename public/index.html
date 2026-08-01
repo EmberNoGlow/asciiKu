@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII.Ku</title>
+    <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="public/style.css">
+    <meta name="description" content="ASCII.Ku - render ASCII diagrams as SVG images directly from Markdown files (via svgbob).">
+    <meta name="keywords" content="ASCII art, ASCII, text to svg, SVG, README, GitHub, diagrams, svgbob, converter, github, utility, opensource, free, developer">
+    <meta name="author" content="EmberNoGlow">
+    <meta property="og:title" content="ASCII.Ku">
+    <meta property="og:description" content="Turn ASCII diagrams into SVG images for GitHub README files.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://asciiku.netlify.app/">
+    <!-- TODO Preview
+    <meta property="og:image" content="https://asciiku.netlify.app/preview.png">
+    -->
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-area">
+            <img height="30" width="auto" src="public/favicon.svg">
+            <h1>ASCII.Ku</h1>
+        </div>
+        <div class="nav-links">
+            <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+            <a href="https://github.com/EmberNoGlow/asciiKu" target="_blank" rel="noopener noreferrer">
+                <span>View on GitHub</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="app-grid">
+        <aside class="sidebar">
+            <h2>Main options</h2>
+
+            <div class="controls">
+                <div class="field">
+                    <label for="url">Raw Markdown URL</label>
+                    <input type="text" id="url" placeholder="https://raw.githubusercontent.com/...">
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label for="id">ASCII Block ID</label>
+                        <input type="number" id="id" value="0">
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 8px;">Colors</h2>
+
+                <div class="row">
+                    <div class="field">
+                        <label for="stroke">Stroke</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="stroke-picker" value="#000000">
+                            <input type="text" id="stroke" value="#000000" maxlength="7">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="bg">Background</label>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="bg-picker" value="#ffffff">
+                            <input type="text" id="bg" value="#ffffff" maxlength="7">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field output-box">
+                    <label for="output-url">Generated link</label>
+                    <div class="copy-row">
+                        <input type="text" id="output-url" readonly value="https://asciiku.netlify.app">
+                        <button type="button" class="btn-action">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="workspace">
+            <div class="gh-box">
+                <div class="gh-box-header">
+                    preview / id: 0
+                </div>
+                <div class="canvas-area">
+                    <span>[ empty workspace ]</span>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+
+    <section class="info-section ascii-info-section">
+        <!-- ABOUT -->
+        <h2 style="text-align: center;" class="ascii-section-title">About ASCII.Ku</h2>
+        <p class="ascii-text-lead">
+            <strong>ASCII.Ku</strong> is a free, open-source web utility that dynamically renders ASCII art into clean SVG images using the <a href="https://ivanceras.github.io/svgbob-editor/" target="_blank" class="ascii-link">svgbob</a> engine.
+        </p>
+        <br>
+        <p>
+            It is specifically tailored for developer profiles and repository READMEs. Instead of manually converting and uploading static images, ASCII.Ku fetches your art directly from your source files on the fly. Update your text, and your diagrams update automatically.
+        </p>
+        <table style="margin: 20px auto; border-collapse: collapse; font-family: sans-serif; font-size: 14px;">
+            <tr>
+                <style>
+                    .ascii-link { color: #0366d6; text-decoration: none; }
+                    .ascii-link:hover { text-decoration: underline; }
+                </style>
+                <td style="padding: 5px 20px; text-align: center; border-right: 1px solid #ccc; font-size: 16px;">
+                    Distributed under the <a href="https://github.com/EmberNoGlow/asciiKu/blob/main/LICENSE" target="_blank" class="ascii-link">MIT License</a>
+                </td>
+                
+                <td style="padding: 5px 20px; text-align: center; font-size: 16px;">
+                    Contribute on <a href="https://github.com/EmberNoGlow/asciiKu" target="_blank" class="ascii-link">GitHub</a>
+                </td>
+            </tr>
+        </table>
+
+
+        <!-- USAGE -->
+        <h2 style="text-align: center;">Usage</h2>
+        <p class="ascii-subtitle">
+            ASCII.Ku allows you to embed ASCII-based SVGs directly into your README files without adding extra files to your repository. Follow these three simple steps to get started:
+        </p>
+        
+        <div class="ascii-step">
+            <h3>1. Create a block in your README.md</h3>
+            <p class="ascii-step-desc">Wrap your ASCII art in a custom comment tag and place it inside a code block.</p>
+            
+            <div class="ascii-code-block">
+<pre><code>&lt;!---123
+      /\
+     /  \
+    /\   \
+   /      \
+  /   /\  _\
+ /   (  )   \
+ \___/  \___/ 
+---&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="ascii-step">
+            <h3>2. Generate your SVG URL</h3>
+            <p class="ascii-step-desc">Use this page or construct the URL manually. You will need the direct link to your raw Markdown file.</p>
+            
+            <div class="ascii-table-wrapper">
+                <table class="ascii-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Parameter</th>
+                            <th style="width: 15%;">Type</th>
+                            <th style="width: 45%;">Description</th>
+                            <th style="width: 25%;">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ascii-param-req">raw</td>
+                            <td><span class="ascii-badge-required">Required</span></td>
+                            <td class="ascii-text-primary">URL to your raw Markdown file on GitHub/Gist</td>
+                            <td class="ascii-text-code-fade">https://raw.github...</td>
+                        </tr>
+                        <tr>
+                            <td class="ascii-param-req">id</td>
+                            <td><span class="ascii-badge-required">Required</span></td>
+                            <td class="ascii-text-primary">The unique ID assigned to your ASCII art block</td>
+                            <td class="ascii-text-code">123</td>
+                        </tr>
+                        <tr>
+                            <td class="ascii-param-opt">bg</td>
+                            <td><span class="ascii-badge-optional">Optional</span></td>
+                            <td class="ascii-text-primary">SVG background color (HEX or name)</td>
+                            <td class="ascii-text-code">%23ffffff <span class="ascii-text-muted">or</span> white</td>
+                        </tr>
+                        <tr>
+                            <td class="ascii-param-opt">stroke</td>
+                            <td><span class="ascii-badge-optional">Optional</span></td>
+                            <td class="ascii-text-primary">Line and text color (HEX or name)</td>
+                            <td class="ascii-text-code">%23000000 <span class="ascii-text-muted">or</span> blue</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 10px;">
+                <span class="ascii-badge-required">ATTENTION:</span> 
+                Since # is an anchor, we need to convert it to %23
+            </p>
+        </div>
+
+        <div class="ascii-step">
+            <h3>3. Embed the image</h3>
+            <p class="ascii-step-desc">Insert the final URL into your Markdown file using standard image syntax:</p>
+            
+            <div class="ascii-embed-block">
+                <span class="ascii-embed-syntax">![my ascii art](https://asciiku.netlify.app/?id=123&raw=file.md</span>
+            </div>
+        </div>
+
+        <h3>Example:</h3>
+        <div class="ascii-example-box">
+            <a href="https://asciiku.netlify.app/?bg=blue&id=123&raw=https://gist.githubusercontent.com/EmberNoGlow/5aa09f26f2b9d908b201d10e500e0a8c/raw/file.md" target="_blank" class="ascii-link ascii-example-url">
+                link: https://asciiku.netlify.app/?bg=blue&id=123&raw=https://gist.githubusercontent.com/EmberNoGlow/5aa09f26f2b9d908b201d10e500e0a8c/raw/file.md</a>
+            <br><br>
+            <img src="https://asciiku.netlify.app/?bg=blue&id=123&raw=https://gist.githubusercontent.com/EmberNoGlow/5aa09f26f2b9d908b201d10e500e0a8c/raw/file.md">
+        </div>
+
+        <!-- SUPPORT -->
+        <h2 style="text-align: center;" class="ascii-section-title">SUPPORT</h2>
+        <p class="ascii-text-lead">
+        If the project interests you, I'd be very grateful if you <strong>could star it on GitHub - that way, more people can find it</strong>! I also invite you to get involved: feel free to suggest improvements, report bugs, submit better code, share your feedback, or even send in your own ASCII art! 
+        </p><br><p style="text-align: center; font-size: 18px;">
+         <strong>Let's create something truly worthwhile together!</strong>
+        </p>
+        <br>
+        <h2 style="text-align: center;" class="ascii-section-title">Find Me ✨</h2>
+
+        <table style="width: 400px; margin: 0 auto; text-align: center; table-layout: fixed;">
+            <tr>
+                <th style="padding: 12px;">GitHub</th>
+                <th style="padding: 12px;">Dev.to</th>
+                <th style="padding: 12px;">Itch.io</th>
+                <th style="padding: 12px;">Bluesky</th>
+            </tr>
+            <tr>
+                <td style="padding: 12px;">
+                    <a href="https://github.com/embernoglow" target="_blank">
+                        <img src="https://cdn.simpleicons.org/github/7C3AED" width="64" height="64" alt="GitHub">
+                    </a>
+                </td>
+                <td style="padding: 12px;">
+                    <a href="https://dev.to/embernoglow" target="_blank">
+                        <img src="https://cdn.simpleicons.org/devdotto/3B49DF" width="64" height="64" alt="Dev.to">
+                    </a>
+                </td>
+                <td style="padding: 12px;">
+                    <a href="https://embernoglow.itch.io" target="_blank">
+                        <img src="https://cdn.simpleicons.org/itchdotio" width="64" height="64" alt="Itch.io">
+                    </a>
+                </td>
+                <td style="padding: 12px;">
+                    <a href="https://bsky.app/profile/embernoglow.bsky.social" target="_blank">
+                        <img src="https://cdn.simpleicons.org/bluesky" width="64" height="64" alt="Bluesky">
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 15px; font-size: 14px;">
+
+            <a href="mailto:embernoglow@proton.me" style="color: aquamarine; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                <img src="https://cdn.simpleicons.org/protonmail/A855F7" width="20" height="20" alt="Email">
+                embernoglow@proton.me
+            </a>
+
+            <span style="color: gray;">•</span>
+
+            <p style="color: aquamarine; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                <img src="https://cdn.simpleicons.org/discord/5865F2" width="20" height="20" alt="Discord">
+                @jennytheglow
+            </p>
+
+        </div>
+
+    </section>
+
+    
+<script src="public/app.js"></script>
+<script>
+const button = document.getElementById("themeToggle");
+const body = document.body;
+
+const savedTheme = localStorage.getItem("theme");
+
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+const isDark = savedTheme === "dark" || (!savedTheme && prefersDark);
+
+if (isDark) {
+    body.classList.add("dark-theme");
+    button.textContent = "☀️ Light";
+} else {
+    button.textContent = "🌙 Dark";
+}
+
+button.addEventListener("click", () => {
+    body.classList.toggle("dark-theme");
+
+    const dark = body.classList.contains("dark-theme");
+    localStorage.setItem("theme", dark ? "dark" : "light");
+
+    button.textContent = dark ? "☀️ Light" : "🌙 Dark";
+});
+
+</script>
+
+</body>
+</html>
