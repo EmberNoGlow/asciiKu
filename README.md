@@ -34,19 +34,18 @@ Wrap your ASCII art in a custom comment tag and place it inside a html comment b
 --->
 ```
 
-### 2. Generate your SVG URL
-Use this page or construct the URL manually. You will need the direct link to your raw Markdown file.
+### 2. Generating an SVG URL
+Follow the visual guide.
 
-| Parameter	Type | Importance | Description	Example |
-|:---------------|:-----------|:--------------------|
-| raw    | Required | URL to your raw Markdown file on GitHub/Gist	https://raw.githubusercontent.com/ ... |
-| id     | Required | The unique ID assigned to your ASCII art block 123 |
-| bg     | Optional | SVG background color (HEX or name)	%23ffffff or white |
-| stroke | Optional	| Line and text color (HEX or name)	%23000000 or blue |
+#### 1. Get raw file url
+![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/sceenshots/step1.png)
 
-> ATTENTION: Since # is an anchor, we need to convert it to %23
+#### 2. Copy link
+![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/sceenshots/step2.png)
 
----
+#### 3. Generate link via [Home page](asciiku.netlify.app/)
+![](https://raw.githubusercontent.com/EmberNoGlow/asciiKu/refs/heads/main/sceenshots/step3.png)
+
 
 ### 3. Embed the image
 Insert the final URL into your Markdown file using standard image syntax:
@@ -54,6 +53,23 @@ Insert the final URL into your Markdown file using standard image syntax:
 ```
 ![my ascii art](https://asciiku.netlify.app/?id=123&raw=file.md)
 ```
+
+
+### 2. Generate your SVG MANUALY
+You will need the direct link to your raw Markdown file. Use `?` after the domain slash `asciiku.netlify.app`, and combine the parameters below with `&`
+
+| Parameter	Type | Importance | Description |
+|:---------------|:-----------|:--------------------|
+| raw    | Required | URL to your raw Markdown file on GitHub/Gist |
+| id     | Required | The unique ID assigned to your ASCII art block 123 |
+| bg     | Optional | SVG background color (HEX or name)	%23ffffff or white |
+| stroke | Optional	| Line and text color (HEX or name)	%23000000 or blue |
+
+> [!NOTE]
+> Since `#` is an anchor, convert it to `%23`.
+
+
+---
 
 ## Examples
 Here I will give a couple of examples. All ASCII schemes are in this [gist](https://gist.githubusercontent.com/EmberNoGlow/5aa09f26f2b9d908b201d10e500e0a8c/raw/637c9bdb5952d6ad58c47ed383485465c3b0d310/file.md). Click on the images to open the link!
